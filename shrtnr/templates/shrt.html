@@ -1,0 +1,23 @@
+<h1>shrt rl</h1>
+{% extends "base.html" %}
+{% block page_content %}
+<div class="col-md-8 offset-md-2">
+    <form method="post">{% csrf_token %}
+        <div class="form-group">
+            shrt: {{ form.url }}
+            <button type="submit" class="btn btn-primary">shrt</button>
+            {% if shrt.shrt %}
+            <button type="button" class="btn btn-secondary" onclick="copyToClip('shrt_url')">cpy shrt</button>
+            <div class="shrt-result">
+                <span id="shrt_url">{{request.build_absolute_uri}}{{shrt.shrt}}</span>
+            </div>
+            {% endif %}
+        </div>
+    </form>
+</div>
+<script>
+    function copyToClip(id) {
+        navigator.clipboard.writeText(document.getElementById(id).innerHTML)
+    }
+</script>
+{% endblock %}
